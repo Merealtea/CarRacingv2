@@ -1,0 +1,41 @@
+name : ppo
+
+ac_kwargs:
+  img_h: 84
+  img_w: 96
+  act_dim: 2
+  conv_channels: [12, 4, 16, 64]
+  mlp_channels: [512, 128, 32]
+
+ppo_kwargs: 
+  history_len : 4
+  seed: 0
+  steps_per_epoch: 1024
+  epochs: 500
+  gamma: 0.99
+  clip_ratio: 0.2 
+  pi_lr:  0.0003
+  vf_lr: 0.0005
+  train_pi_iters: 10
+  train_v_iters: 10
+
+  data_augument_rate : 0.00
+  lam: 0.97
+  max_ep_len: 1000
+  target_kl: 0.01
+  mini_batchsize : 64
+
+  lr_decay : False
+  schedule_step_size : 5
+  decay_rate : 0.5
+
+  adv_norm : true
+
+  ent_coef : 0.00
+  vf_coef : 1
+  pi_coef : 1
+
+  clip_value : False
+
+save_path : /mnt/pool1/project_car_racing/src/logs/ppo_2023_11_20_15_52_36
+GPU_NUM : 1
