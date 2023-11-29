@@ -17,7 +17,7 @@ class ActorCritic(nn.Module):
     def step(self, obs):
         raise NotImplementedError
         
-    def act(self, obs):
+    def act(self, obs, wo_std = False):
         raise NotImplementedError
   
     
@@ -49,8 +49,11 @@ class CarRaceActorCritic(ActorCritic):
         wrapped_action = self.wrap_action(original_action)
         return wrapped_action, original_action.cpu().detach().numpy(), v.cpu().detach().numpy(), logp_a.cpu().detach().numpy()
     
-    def act(self, obs):
-        return self.step(obs)[0]
+    def act(self, obs, wo_std = False):
+        if wo_std:
+            self.actor.act_wo_std(obs)
+        else:
+            return self.step(obs)[0]
 
 
 class Actor(nn.Module):
@@ -67,6 +70,9 @@ class Actor(nn.Module):
         raise NotImplementedError
 
     def _log_prob_from_distribution(self, pi, act):
+        raise NotImplementedError
+    
+    def act_wo_std(self, obs):
         raise NotImplementedError
 
     def forward(self, obs, act=None):
@@ -99,6 +105,13 @@ class GaussianActor(Actor):
         mu = self.tanh(mu)
         std = torch.exp(self.log_std)
         return Normal(mu, std)
+    
+    def act_wo_std(self, obs):
+        encoded_feature = self.encoder(obs)
+        mu = self.mu_net(encoded_feature)
+        mu = self.act_mean(mu)
+        mu = self.tanh(mu)
+        return mu
 
     def _log_prob_from_distribution(self, pi, act):
         return pi.log_prob(act).sum(axis=-1)    # Last axis sum needed for Torch Normal distribution

@@ -10,8 +10,8 @@ ac_kwargs:
 ppo_kwargs: 
   history_len : 4
   seed: 0
-  steps_per_epoch: 1024
-  epochs: 500
+  steps_per_epoch: 2048
+  epochs: 300
   gamma: 0.99
   clip_ratio: 0.2 
   pi_lr:  0.0003
@@ -23,19 +23,19 @@ ppo_kwargs:
   lam: 0.97
   max_ep_len: 1000
   target_kl: 0.01
-  mini_batchsize : 64
+  mini_batchsize : 128
 
   lr_decay : False
-  schedule_step_size : 5
-  decay_rate : 0.5
+  schedule_step_size : 50
+  decay_rate : 0.9
 
   adv_norm : true
 
-  ent_coef : 0.00
+  ent_coef : 0.0
   vf_coef : 1
   pi_coef : 1
 
   clip_value : False
 
-save_path : /mnt/pool1/project_car_racing/src/logs/ppo_2023_11_20_15_52_36
+save_path : 
 GPU_NUM : 1

@@ -459,8 +459,15 @@ class Wrapped_Env():
         # car position
 
         x,y = self.env.car.hull.position
-        if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2< 0.0001:
-            r -= 1
+
+        if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2< 0.00001:
+            r -= 0.1
+            
+        if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2> 0.8 :
+            # print((self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2)
+            r -= 0.2
+
+        # r += 0.4-np.abs((self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2 - 0.5)
         self.prev_position = (x, y)
         if self.is_pass(x, y):
             self.next_closet_point += 1
@@ -473,7 +480,6 @@ class Wrapped_Env():
             _, _, x2, y2 = self.env.track[self.next_closet_point + 1] 
         else:
             _, _, x2, y2 = self.env.track[self.next_closet_point - 1]
-        
         
         dist = (x-x1)**2 + (y-y1)**2 - ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / ((x1-x2)**2 + (y1-y2)**2)
         if dist < 0:

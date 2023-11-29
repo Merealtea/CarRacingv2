@@ -1,0 +1,150 @@
+absl-py @ file:///croot/absl-py_1686852429912/work
+addict==2.4.0
+aiohttp @ file:///croot/aiohttp_1694181079612/work
+aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
+ale-py==0.8.1
+ansi2html==1.8.0
+asttokens==2.4.1
+async-timeout @ file:///opt/conda/conda-bld/async-timeout_1664876359750/work
+attrs @ file:///croot/attrs_1695717823297/work
+backcall==0.2.0
+beautifulsoup4==4.12.2
+blinker @ file:///croot/blinker_1696539051175/work
+box2d-py==2.3.5
+Brotli @ file:///tmp/abs_ecyw11_7ze/croots/recipe/brotli-split_1659616059936/work
+cachetools @ file:///tmp/build/80754af9/cachetools_1619597386817/work
+CartPoleSwingUp @ git+https://github.com/TTitcombe/CartPoleSwingUp.git@14c5a2a1eff23b50efa789af0b6d1326b84987cb
+certifi @ file:///croot/certifi_1690232220950/work/certifi
+cffi @ file:///croot/cffi_1670423208954/work
+chardet==5.2.0
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+click @ file:///croot/click_1698129812380/work
+cloudpickle==3.0.0
+comm==0.2.0
+ConfigArgParse==1.7
+contourpy==1.1.1
+cryptography @ file:///croot/cryptography_1694444244250/work
+cumm==0.4.11
+cycler==0.12.1
+Cython==0.29.36
+dash==2.14.1
+dash-core-components==2.0.0
+dash-html-components==2.0.0
+dash-table==5.0.0
+decorator==4.4.2
+etils==1.3.0
+executing==2.0.1
+Farama-Notifications==0.0.4
+fasteners==0.19
+fastjsonschema==2.18.1
+Flask==2.1.3
+fonttools==4.43.1
+frozenlist @ file:///croot/frozenlist_1698702560391/work
+glfw==2.6.2
+google==3.0.0
+google-auth @ file:///croot/google-auth_1694152708165/work
+google-auth-oauthlib @ file:///opt/conda/conda-bld/google-auth-oauthlib_1660687784486/work
+grpcio @ file:///croot/grpc-suite_1698063141529/work
+gymnasium==0.29.1
+idna @ file:///croot/idna_1666125576474/work
+imageio==2.31.6
+imageio-ffmpeg==0.4.9
+importlib-metadata @ file:///croot/importlib-metadata_1678997070253/work
+importlib-resources==6.1.0
+ipython==8.12.3
+ipywidgets==8.1.1
+itsdangerous==2.1.2
+jax==0.4.13
+jaxlib==0.4.13
+jedi==0.19.1
+Jinja2==3.1.2
+joblib==1.3.2
+jsonschema==4.19.2
+jsonschema-specifications==2023.7.1
+jupyter_core==5.5.0
+jupyterlab-widgets==3.0.9
+kiwisolver==1.4.5
+lz4==4.3.2
+Markdown @ file:///croot/markdown_1671541909495/work
+MarkupSafe @ file:///opt/conda/conda-bld/markupsafe_1654597864307/work
+matplotlib==3.7.3
+matplotlib-inline==0.1.6
+mkl-fft @ file:///croot/mkl_fft_1695058164594/work
+mkl-random @ file:///croot/mkl_random_1695059800811/work
+mkl-service==2.4.0
+ml-dtypes==0.2.0
+moviepy==1.0.3
+mujoco==3.0.0
+mujoco-py==2.1.2.14
+multidict @ file:///croot/multidict_1665674239670/work
+nbformat==5.9.2
+nest-asyncio==1.5.8
+numpy==1.21.0
+oauthlib @ file:///croot/oauthlib_1679489621486/work
+open3d==0.17.0
+-e git+https://github.com/DonghaoQiao/Adaptive-Feature-Fusion-for-Cooperative-Perception.git@bf69273b8c11448f463f47b56bc65aacd50f8d44#egg=OpenCOOD
+opencv-python==4.8.1.78
+opt-einsum==3.3.0
+packaging==23.2
+pandas==2.0.3
+parso==0.8.3
+pexpect==4.8.0
+pickleshare==0.7.5
+Pillow==10.0.1
+pkgutil_resolve_name==1.3.10
+platformdirs==3.11.0
+plotly==5.18.0
+proglog==0.1.10
+prompt-toolkit==3.0.39
+protobuf==3.20.3
+ptyprocess==0.7.0
+pure-eval==0.2.2
+pyasn1 @ file:///Users/ktietz/demo/mc3/conda-bld/pyasn1_1629708007385/work
+pyasn1-modules==0.2.8
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pygame==2.5.2
+pyglet==2.0.9
+Pygments==2.16.1
+PyJWT @ file:///opt/conda/conda-bld/pyjwt_1657544592787/work
+PyOpenGL==3.1.7
+pyOpenSSL @ file:///croot/pyopenssl_1690223430423/work
+pyparsing==3.1.1
+pyquaternion==0.9.9
+PySocks @ file:///tmp/build/80754af9/pysocks_1605305779399/work
+python-dateutil==2.8.2
+pytz==2023.3.post1
+PyYAML==6.0.1
+referencing==0.30.2
+requests @ file:///croot/requests_1690400202158/work
+requests-oauthlib==1.3.0
+retrying==1.3.4
+rpds-py==0.12.0
+rsa @ file:///tmp/build/80754af9/rsa_1614366226499/work
+scikit-learn==1.3.2
+scipy==1.10.1
+shapely==2.0.1
+Shimmy==0.2.1
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+soupsieve==2.5
+stack-data==0.6.3
+swig==4.1.1
+tenacity==8.2.3
+tensorboard @ file:///home/builder/mesters/opt/envs/tensorflow/conda-bld/tensorboard_1682445826165/work/tensorboard-2.12.1-py3-none-any.whl
+tensorboard-data-server @ file:///croot/tensorboard-data-server_1681498183723/work/tensorboard_data_server-0.7.0-py3-none-manylinux2014_x86_64.whl
+tensorboard-plugin-wit @ file:///home/builder/tkoch/workspace/tensorflow/tensorboard-plugin-wit_1658918494740/work/tensorboard_plugin_wit-1.8.1-py3-none-any.whl
+tensorboardX==2.6.2.2
+threadpoolctl==3.2.0
+torch==1.13.1+cu117
+torchaudio==0.13.1+cu117
+torchvision==0.14.1+cu117
+tqdm @ file:///croot/tqdm_1679561862951/work
+traitlets==5.13.0
+typing_extensions==4.8.0
+tzdata==2023.3
+ufal.pybox2d==2.3.10.2
+urllib3 @ file:///croot/urllib3_1698257533958/work
+wcwidth==0.2.9
+Werkzeug @ file:///croot/werkzeug_1679489717957/work
+widgetsnbextension==4.0.9
+yarl @ file:///opt/conda/conda-bld/yarl_1661437085904/work
+zipp @ file:///croot/zipp_1672387121353/work

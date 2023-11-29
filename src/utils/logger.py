@@ -61,7 +61,7 @@ class Logger:
             self.episode += 1
             self.rewards.clear()
 
-    def save_model(self, model, epoch, pi_optim, vf_optim, pi_scheduler, vf_scheduler, name):
+    def save_model(self, model, epoch, pi_optim, vf_optim, pi_scheduler, vf_scheduler, max_ret, name):
         if not name.endswith(".pth"):
             name += ".pth"
         tsave({"ac" : model.state_dict(),
@@ -69,6 +69,7 @@ class Logger:
                "vf_optim" : vf_optim.state_dict(),
                "pi_scheduler" : pi_scheduler.state_dict(),
                "vf_scheduler" : vf_scheduler.state_dict(),
+               "max_ret" : max_ret,
                "epoch" : epoch}
               , os.path.join(self.save_path, name))
 

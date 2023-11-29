@@ -7,10 +7,6 @@ import torch
 
 from src.algorithms.ppo import PPO
 from src.models.ActorCritic import CarRaceActorCritic
-# from src.algorithms.double_deep_q_learning import DoubleDQNAtariAgent
-# from src.models import DDQN
-# from src.utils.assessment import AtariEvaluator
-# from src.utils.env import DiscreteCarRacing, wrap_deepmind, wrap_box2d
 from src.utils.logger import setup_train
 import yaml
 
