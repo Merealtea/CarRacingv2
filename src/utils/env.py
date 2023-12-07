@@ -441,26 +441,26 @@ class Wrapped_Env():
             return False
 
     def step(self, a):
-        next_o, r, d, tmp1, tmp2 = self.env.step(a)
-        next_o = self.crop_img(next_o)
+        next_orin_o, r, d, tmp1, tmp2 = self.env.step(a)
+        next_o = self.crop_img(next_orin_o)
         self.add_obs(next_o)
         next_o = np.concatenate(self.historys, axis = 1)
 
         r = self.handed_reward(r)
-        if r == -20:
+        if r < -10:
             d = True
 
-        return next_o, r, d, tmp1, tmp2 
+        return next_o, r, d, next_orin_o, tmp2 
     
     def render(self):
         self.env.render()
 
     def handed_reward(self, r):
+        r = max(0, r)
         # car position
-
         x,y = self.env.car.hull.position
 
-        if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2< 0.00001:
+        if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2< 0.0001:
             r -= 0.1
             
         if (self.prev_position[0]-x)**2 +(self.prev_position[1]-y)**2> 0.8 :

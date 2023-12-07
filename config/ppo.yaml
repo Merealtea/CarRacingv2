@@ -1,41 +1,40 @@
-name : ppo
-
+GPU_NUM: 1
 ac_kwargs:
+  act_dim: 2
+  conv_channels:
+  - 12
+  - 4
+  - 16
+  - 64
   img_h: 84
   img_w: 96
-  act_dim: 2
-  conv_channels: [12, 4, 16, 64]
-  mlp_channels: [512, 128, 32]
-
-ppo_kwargs: 
-  history_len : 4
-  seed: 0
-  steps_per_epoch: 2048
+  mlp_channels:
+  - 512
+  - 128
+  - 32
+name: ppo
+ppo_kwargs:
+  adv_norm: false
+  clip_ratio: 0.2
+  clip_value: false
+  data_augument_rate: 0.0
+  decay_rate: 0.9
+  ent_coef: 0.0
   epochs: 300
   gamma: 0.99
-  clip_ratio: 0.2 
-  pi_lr:  0.0003
-  vf_lr: 0.0005
+  history_len: 4
+  lam: 0.97
+  lr_decay: false
+  max_ep_len: 1000
+  mini_batchsize: 64
+  pi_coef: 1
+  pi_lr: 0.0003
+  schedule_step_size: 100
+  seed: 0
+  steps_per_epoch: 2048
+  target_kl: 0.01
   train_pi_iters: 10
   train_v_iters: 10
-
-  data_augument_rate : 0.00
-  lam: 0.97
-  max_ep_len: 1000
-  target_kl: 0.01
-  mini_batchsize : 128
-
-  lr_decay : False
-  schedule_step_size : 50
-  decay_rate : 0.9
-
-  adv_norm : true
-
-  ent_coef : 0.0
-  vf_coef : 1
-  pi_coef : 1
-
-  clip_value : False
-
-save_path : 
-GPU_NUM : 1
+  vf_coef: 1
+  vf_lr: 0.0005
+save_path: null

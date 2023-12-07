@@ -8,13 +8,14 @@ from src.utils.replay_buffer import PPOBuffer, to_device
 from src.utils.env import Wrapped_Env
 from torch.optim.lr_scheduler import StepLR
 import os
+import cv2
 
 class PPO():
     def __init__(self, env,actor_critic, history_len, device , ac_kwargs=dict(), seed=0, 
         steps_per_epoch=4000, epochs=50, gamma=0.99, clip_ratio=0.2, pi_lr=3e-4,
         vf_lr=1e-3, train_pi_iters=80, train_v_iters=80, lam=0.97, max_ep_len=1000,
         target_kl=0.01, save_path = None, schedule_step_size = 5, decay_rate = 0.5 , mini_batchsize = 32, adv_norm = False,
-        lr_decay = False, ent_coef = 0, vf_coef = 0, pi_coef = 0, clip_value  = False, data_augument_rate = 0):
+        lr_decay = False, ent_coef = 0, vf_coef = 0, pi_coef = 0, clip_value  = False, data_augument_rate = 0, train =True):
 
         # Random seed
         torch.manual_seed(seed)
@@ -62,27 +63,30 @@ class PPO():
         
         self.pi_scheduler = StepLR(self.pi_optimizer, step_size=schedule_step_size, gamma=decay_rate)
         self.vf_scheduler = StepLR(self.vf_optimizer, step_size=schedule_step_size, gamma=decay_rate)
-
-        # Logger
-        self.logger = Logger(save_path)
         self.save_path = save_path
 
-
-        # Load model
-        if "best_model.pth" in os.listdir(save_path):
+        # Logger
+        if train:
+            self.logger = Logger(save_path)
+            # Load model
+            if "best_model.pth" in os.listdir(save_path):
+                ckpt = torch.load(join(save_path, "best_model.pth"))
+                self.start_epoch = ckpt["epoch"]
+                
+                
+                self.ac.load_state_dict(ckpt["ac"])
+                self.pi_optimizer.load_state_dict(ckpt["pi_optim"])
+                self.vf_optimizer.load_state_dict(ckpt["vf_optim"])
+                self.pi_scheduler.load_state_dict(ckpt["pi_scheduler"])
+                self.vf_scheduler.load_state_dict(ckpt["vf_scheduler"])
+                self.max_ret = ckpt["max_ret"]
+                print("Load Previous ckpt and training from epoch {}, average reward is {}".format(self.start_epoch, self.max_ret))
+        else:
+            self.save_path = None
             ckpt = torch.load(join(save_path, "best_model.pth"))
-            self.start_epoch = ckpt["epoch"]
-            
-            
+            self.start_epoch = ckpt["epoch"]            
             self.ac.load_state_dict(ckpt["ac"])
-            self.pi_optimizer.load_state_dict(ckpt["pi_optim"])
-            self.vf_optimizer.load_state_dict(ckpt["vf_optim"])
-            self.pi_scheduler.load_state_dict(ckpt["pi_scheduler"])
-            self.vf_scheduler.load_state_dict(ckpt["vf_scheduler"])
-            self.max_ret = ckpt["max_ret"]
-
             self.validate(self.start_epoch)
-            print("Load Previous ckpt and training from epoch {}, average reward is {}".format(self.start_epoch, self.max_ret))
 
     # Set up function for computing PPO policy loss, Clip PPO
     def compute_loss_pi(self, data):
@@ -245,6 +249,10 @@ class PPO():
         episode_num = 10
         all_ret = 0
 
+        # if self.save_path is not None:
+        #     fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        #     out = cv2.VideoWriter(join(self.save_path, "val_{}.avi".format(epoch)),fourcc, 50, (96, 96))
+
         # Main loop: collect experience in env and update/log each epoch
         print("Validation for epoch {}".format(epoch))
         for _ in range(episode_num):
@@ -255,9 +263,13 @@ class PPO():
                     a, ori_a, v, logp = \
                         self.ac.step(torch.as_tensor(o, dtype=torch.float32).to(self.device))
                     
-                    next_o, r, d, _, _ = self.env.step(a)
+                    next_o, r, d, next_orin_o, _ = self.env.step(a)
+                    # if self.save_path is not None:
+                    #     next_orin_o = cv2.cvtColor(next_orin_o, cv2.COLOR_BGR2RGB)
+                    #     out.write(next_orin_o)
                     all_ret += r
                     o = next_o
-
         print("Mean episode reward for epoch {} is {}".format(epoch, all_ret / episode_num)) 
+        # if self.save_path is not None:
+        #     out.release()
         return all_ret / episode_num
